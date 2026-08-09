@@ -10,14 +10,14 @@ This is a repository of my solutions for all the problems in `Typescript`.
 
 ### Installation
 
-You'll need Node.js and the next packages:
+Install [Bun](https://bun.sh/), then install the project dependencies:
 
-```
-yarn install
+```sh
+bun install
 ```
 
 To run a specific solution:
 
-```
-npx ts-node typescript-file.ts
+```sh
+bun run typescript-file.ts
 ```
