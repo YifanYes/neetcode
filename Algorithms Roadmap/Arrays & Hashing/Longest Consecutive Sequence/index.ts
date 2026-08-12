@@ -1,30 +1,23 @@
-function compareNumbers(a: number, b: number): number {
-  return a - b
-}
-
 function longestConsecutive(nums: number[]): number {
-  const sortedNums = nums.toSorted(compareNumbers)
+  const numsSet = new Set(nums)
+  let bestLength = 0
 
-  const consecutiveNumbersMatrix: number[][] = []
-  consecutiveNumbersMatrix.push([sortedNums[0]])
+  numsSet.forEach(num => {
+    // Identify if the number is the beginning of a sequence
+    if (!numsSet.has(num - 1)) {
+      let currentLength = 1
+      let currentNum = num
 
-  for (let num of sortedNums) {
-    for (let list of consecutiveNumbersMatrix) {
-      if (list.includes(num)) break
+      while (numsSet.has(currentNum + 1)) {
+        currentNum += 1
+        currentLength += 1
+      }
 
-      const lastNumber = list[list.length - 1]
-
-      if (lastNumber + 1 === num) {
-        list.push(num)
-      } else {
-        consecutiveNumbersMatrix.push([num])
+      if (currentLength > bestLength) {
+        bestLength = currentLength
       }
     }
-  }
+  })
 
-  const consecutiveListLengths = consecutiveNumbersMatrix.map(consecutiveList => consecutiveList.length)
-
-  return Math.max(...consecutiveListLengths)
+  return bestLength
 }
-
-longestConsecutive([2, 20, 4, 10, 3, 4, 5])
